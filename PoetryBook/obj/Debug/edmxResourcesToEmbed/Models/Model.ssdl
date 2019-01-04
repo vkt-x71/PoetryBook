@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PoetryBookDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tbcategory">
+    <Key>
+      <PropertyRef Name="categoryID" />
+    </Key>
+    <Property Name="categoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="description" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbcomment">
+    <Key>
+      <PropertyRef Name="commentID" />
+    </Key>
+    <Property Name="commentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="comment" Type="varchar(max)" Nullable="false" />
+    <Property Name="authoridsof" Type="int" Nullable="false" />
+    <Property Name="poetryidsof" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbmember">
+    <Key>
+      <PropertyRef Name="memberID" />
+    </Key>
+    <Property Name="memberID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nick" Type="varchar" MaxLength="12" Nullable="false" />
+    <Property Name="nameandsurname" Type="varchar" MaxLength="25" />
+    <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="mail" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="birthdate" Type="date" />
+    <Property Name="gender" Type="char" MaxLength="1" />
+    <Property Name="accounttype" Type="char" MaxLength="1" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbpoet">
+    <Key>
+      <PropertyRef Name="poetID" />
+    </Key>
+    <Property Name="poetID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nameandsurname" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="biography" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbpoetry">
+    <Key>
+      <PropertyRef Name="poetryID" />
+    </Key>
+    <Property Name="poetryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="title" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="content" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="poetidsof" Type="int" Nullable="false" />
+    <Property Name="catidsof" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_tbcomment_tbmember">
+    <End Role="tbmember" Type="Self.tbmember" Multiplicity="1" />
+    <End Role="tbcomment" Type="Self.tbcomment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbmember">
+        <PropertyRef Name="memberID" />
+      </Principal>
+      <Dependent Role="tbcomment">
+        <PropertyRef Name="authoridsof" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbcomment_tbpoetry">
+    <End Role="tbpoetry" Type="Self.tbpoetry" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tbcomment" Type="Self.tbcomment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbpoetry">
+        <PropertyRef Name="poetryID" />
+      </Principal>
+      <Dependent Role="tbcomment">
+        <PropertyRef Name="poetryidsof" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbpoetry_tbcategory">
+    <End Role="tbcategory" Type="Self.tbcategory" Multiplicity="1" />
+    <End Role="tbpoetry" Type="Self.tbpoetry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbcategory">
+        <PropertyRef Name="categoryID" />
+      </Principal>
+      <Dependent Role="tbpoetry">
+        <PropertyRef Name="catidsof" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbpoetry_tbpoet">
+    <End Role="tbpoet" Type="Self.tbpoet" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tbpoetry" Type="Self.tbpoetry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbpoet">
+        <PropertyRef Name="poetID" />
+      </Principal>
+      <Dependent Role="tbpoetry">
+        <PropertyRef Name="poetidsof" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PoetryBookDbModelStoreContainer">
+    <EntitySet Name="tbcategory" EntityType="Self.tbcategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbcomment" EntityType="Self.tbcomment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbmember" EntityType="Self.tbmember" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbpoet" EntityType="Self.tbpoet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbpoetry" EntityType="Self.tbpoetry" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_tbcomment_tbmember" Association="Self.FK_tbcomment_tbmember">
+      <End Role="tbmember" EntitySet="tbmember" />
+      <End Role="tbcomment" EntitySet="tbcomment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbcomment_tbpoetry" Association="Self.FK_tbcomment_tbpoetry">
+      <End Role="tbpoetry" EntitySet="tbpoetry" />
+      <End Role="tbcomment" EntitySet="tbcomment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbpoetry_tbcategory" Association="Self.FK_tbpoetry_tbcategory">
+      <End Role="tbcategory" EntitySet="tbcategory" />
+      <End Role="tbpoetry" EntitySet="tbpoetry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbpoetry_tbpoet" Association="Self.FK_tbpoetry_tbpoet">
+      <End Role="tbpoet" EntitySet="tbpoet" />
+      <End Role="tbpoetry" EntitySet="tbpoetry" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

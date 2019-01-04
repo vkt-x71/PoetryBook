@@ -1,0 +1,150 @@
+﻿@using PoetryBook.Models;
+@{
+    ViewBag.Title = "Index";
+}
+@model tbcategory
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    Kategori Yönetimi
+                    @if (Model != null)
+                    {
+                        <a class="pull-right" title="Yeni Kategori Ekle" href="/Admin/Category/Index">
+                            <i class="glyphicon glyphicon-pencil"></i>
+
+                        </a>
+                    }
+                </h1>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+
+                <br />
+                @if (Model == null)
+                {
+                    <h2>Kategori Ekle</h2>
+                }
+                else
+                {
+                    <h2>@Model.name Kategorisi Detayları</h2>
+                }
+                <hr />
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+
+                <form role="form" action="/Admin/Category/AddCategoryAsync" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+
+                        <label>Adı</label>
+                        @if (Model == null)
+                        {
+                            <input class="form-control" id="name" name="name" />
+                            <input type="hidden" id="catid" name="catid" value="0" />
+
+                        }
+                        else
+                        {
+                            <input type="hidden" id="catid" name="catid" value="@Model.categoryID" />
+
+                            <input class="form-control" id="name" name="name" value="@Model.name" />
+                        }
+
+                    </div>
+                    <div class="form-group">
+                        <label>Açıklama</label>
+                        @if (Model == null)
+                        {
+                            <textarea class="form-control" rows="3" id="desc" name="desc"></textarea>
+                        }
+                        else
+                        {
+                            <textarea class="form-control" rows="3" id="desc" name="desc">@Model.description</textarea>
+                        }
+                    </div>
+
+                    @if (Model == null)
+                    {
+                        <button id="btnaddcat" class="btn btn-default">Ekle</button>
+                    }
+                    else
+                    {
+                        <button id="btneditcat" class="btn btn-default">Kaydet</button>
+
+                    }
+
+                </form>
+
+
+            </div>
+        </div>
+
+        <!-- list category begin -->
+        <div class="row">
+            <div class="col-sm-12">
+
+                <br />
+                <h2>Kategori Listesi</h2>
+                <hr />
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4 text-center">
+                Kategori Adı
+
+            </div>
+            <div class="col-sm-5 text-center">
+                Açıklama
+
+            </div>
+
+            <div class="col-sm-3 text-center">
+                İşlem
+            </div>
+        </div>
+        @if (ViewBag.cats.Count > 0)
+        {
+            foreach (tbcategory item in ViewBag.cats)
+            {
+
+                <br />
+                <div class="row" id="r_@item.categoryID">
+                    <div class="col-sm-4 text-center">
+                        <a href="/Admin/Category/Index/@item.categoryID">@item.name</a>
+
+                    </div>
+                    <div class="col-sm-5 text-center">
+                        @item.description
+
+                    </div>
+
+                    <div class="col-sm-3 text-center">
+
+                        <a href="/Admin/Category/Index/@item.categoryID">Düzenle</a> |
+                        <a id="delcat_@item.categoryID" class="deletecatinlist" style="cursor:pointer">Sil</a>
+
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <br />
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <label>Kayıt bulunamadı.</label>
+                </div>
+            </div>
+        }
+        <br />
+    </div>
+</div>

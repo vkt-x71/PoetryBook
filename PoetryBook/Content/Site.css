@@ -1,0 +1,209 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+
+
+.marleft5 {
+    margin-left: 5px;
+}
+
+#contact-block {
+}
+
+    #contact-block i {
+        margin-left: 10px;
+    }
+
+.marleft35 {
+    margin-left: 35px;
+}
+
+.list-cat {
+    margin-left: 15px;
+    padding: 0px;
+}
+
+    .list-cat li {
+    }
+
+
+
+img {
+    max-width: 95%;
+}
+
+.ASize {
+    padding: 10px 30px 10px 30px;
+}
+
+.mar5 {
+    margin: 5px;
+}
+
+.martop5 {
+    margin-top: 5px;
+}
+
+#discephe {
+    float: left;
+    width: 100%;
+    position: absolute;
+    padding: 0px;
+    margin: 0px;
+    background-color: #f2e6dc;
+}
+
+.icblok {
+    background-color: #ffffff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 10px 10px #757575;
+    box-shadow: 0px 10px 10px #757575;
+    margin-bottom: 30px;
+}
+
+.info-bar {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+}
+
+.panel-primary > .panel-body {
+    -webkit-box-shadow: 0 10px 10px #757575;
+    box-shadow: 0px 10px 10px #757575;
+}
+
+
+
+.ulkatlist {
+    list-style: none;
+}
+
+    .ulkatlist li {
+        display: block;
+    }
+
+        .ulkatlist li a {
+            vertical-align: top;
+        }
+
+.uyeKayitMenu {
+    width: 80%;
+    margin-top: 40px;
+}
+
+    .uyeKayitMenu span {
+    }
+
+.uyemaildiv {
+    margin-top: 200px;
+    margin-bottom: 200px;
+}
+
+.ChcBox {
+    display: inline;
+    color: black;
+}
+
+.menudisdiv {
+    height: 100%;
+}
+
+.menubolum {
+    background-color: #353535;
+}
+
+    .menubolum span {
+        color: white;
+    }
+
+.msag {
+}
+
+.Yanitla {
+}
+
+
+
+
+.pagination {
+}
+
+
+
+.pagination a {
+    margin-left: 5px;
+}
+
+
+.clear20 {
+    clear: both;
+    height: 20px;
+    margin: 0px;
+    padding: 0px;
+    display: block;
+}
+
+.clear10 {
+    clear: both;
+    height: 10px;
+    margin: 0px;
+    padding: 0px;
+    display: block;
+}
+
+#social-media {
+    position: fixed;
+    z-index: 5;
+    width: auto;
+    height: auto;
+    right: 5px;
+    padding-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 5px;
+    background-color: #337ab7;
+    color: white;
+    border: double 1px;
+    border-radius: 7px;
+}
+
+    #social-media ul {
+        list-style: none;
+        margin-left: 0px;
+        padding-left: 0px;
+    }
+
+        #social-media ul li {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+            #social-media ul li a {
+                color: white;
+            }
+
+            
+        

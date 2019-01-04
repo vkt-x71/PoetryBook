@@ -1,0 +1,348 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PoetryBookDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbcategory">
+          <Key>
+            <PropertyRef Name="categoryID" />
+          </Key>
+          <Property Name="categoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="description" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbcomment">
+          <Key>
+            <PropertyRef Name="commentID" />
+          </Key>
+          <Property Name="commentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="comment" Type="varchar(max)" Nullable="false" />
+          <Property Name="authoridsof" Type="int" Nullable="false" />
+          <Property Name="poetryidsof" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbmember">
+          <Key>
+            <PropertyRef Name="memberID" />
+          </Key>
+          <Property Name="memberID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nick" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="nameandsurname" Type="varchar" MaxLength="25" />
+          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="mail" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="birthdate" Type="date" />
+          <Property Name="gender" Type="char" MaxLength="1" />
+          <Property Name="accounttype" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbpoet">
+          <Key>
+            <PropertyRef Name="poetID" />
+          </Key>
+          <Property Name="poetID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nameandsurname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="biography" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbpoetry">
+          <Key>
+            <PropertyRef Name="poetryID" />
+          </Key>
+          <Property Name="poetryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="content" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="poetidsof" Type="int" Nullable="false" />
+          <Property Name="catidsof" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_tbcomment_tbmember">
+          <End Role="tbmember" Type="Self.tbmember" Multiplicity="1" />
+          <End Role="tbcomment" Type="Self.tbcomment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbmember">
+              <PropertyRef Name="memberID" />
+            </Principal>
+            <Dependent Role="tbcomment">
+              <PropertyRef Name="authoridsof" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbcomment_tbpoetry">
+          <End Role="tbpoetry" Type="Self.tbpoetry" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbcomment" Type="Self.tbcomment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbpoetry">
+              <PropertyRef Name="poetryID" />
+            </Principal>
+            <Dependent Role="tbcomment">
+              <PropertyRef Name="poetryidsof" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbpoetry_tbcategory">
+          <End Role="tbcategory" Type="Self.tbcategory" Multiplicity="1" />
+          <End Role="tbpoetry" Type="Self.tbpoetry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbcategory">
+              <PropertyRef Name="categoryID" />
+            </Principal>
+            <Dependent Role="tbpoetry">
+              <PropertyRef Name="catidsof" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbpoetry_tbpoet">
+          <End Role="tbpoet" Type="Self.tbpoet" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbpoetry" Type="Self.tbpoetry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbpoet">
+              <PropertyRef Name="poetID" />
+            </Principal>
+            <Dependent Role="tbpoetry">
+              <PropertyRef Name="poetidsof" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PoetryBookDbModelStoreContainer">
+          <EntitySet Name="tbcategory" EntityType="Self.tbcategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbcomment" EntityType="Self.tbcomment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbmember" EntityType="Self.tbmember" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbpoet" EntityType="Self.tbpoet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbpoetry" EntityType="Self.tbpoetry" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tbcomment_tbmember" Association="Self.FK_tbcomment_tbmember">
+            <End Role="tbmember" EntitySet="tbmember" />
+            <End Role="tbcomment" EntitySet="tbcomment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbcomment_tbpoetry" Association="Self.FK_tbcomment_tbpoetry">
+            <End Role="tbpoetry" EntitySet="tbpoetry" />
+            <End Role="tbcomment" EntitySet="tbcomment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbpoetry_tbcategory" Association="Self.FK_tbpoetry_tbcategory">
+            <End Role="tbcategory" EntitySet="tbcategory" />
+            <End Role="tbpoetry" EntitySet="tbpoetry" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbpoetry_tbpoet" Association="Self.FK_tbpoetry_tbpoet">
+            <End Role="tbpoet" EntitySet="tbpoet" />
+            <End Role="tbpoetry" EntitySet="tbpoetry" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PoetryBookDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="PoetryBookDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbcategories" EntityType="PoetryBookDbModel.tbcategory" />
+          <EntitySet Name="tbcomments" EntityType="PoetryBookDbModel.tbcomment" />
+          <EntitySet Name="tbmembers" EntityType="PoetryBookDbModel.tbmember" />
+          <EntitySet Name="tbpoets" EntityType="PoetryBookDbModel.tbpoet" />
+          <EntitySet Name="tbpoetries" EntityType="PoetryBookDbModel.tbpoetry" />
+          <AssociationSet Name="FK_tbpoetry_tbcategory" Association="PoetryBookDbModel.FK_tbpoetry_tbcategory">
+            <End Role="tbcategory" EntitySet="tbcategories" />
+            <End Role="tbpoetry" EntitySet="tbpoetries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbcomment_tbmember" Association="PoetryBookDbModel.FK_tbcomment_tbmember">
+            <End Role="tbmember" EntitySet="tbmembers" />
+            <End Role="tbcomment" EntitySet="tbcomments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbcomment_tbpoetry" Association="PoetryBookDbModel.FK_tbcomment_tbpoetry">
+            <End Role="tbpoetry" EntitySet="tbpoetries" />
+            <End Role="tbcomment" EntitySet="tbcomments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbpoetry_tbpoet" Association="PoetryBookDbModel.FK_tbpoetry_tbpoet">
+            <End Role="tbpoet" EntitySet="tbpoets" />
+            <End Role="tbpoetry" EntitySet="tbpoetries" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tbcategory">
+          <Key>
+            <PropertyRef Name="categoryID" />
+          </Key>
+          <Property Name="categoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbpoetries" Relationship="PoetryBookDbModel.FK_tbpoetry_tbcategory" FromRole="tbcategory" ToRole="tbpoetry" />
+        </EntityType>
+        <EntityType Name="tbcomment">
+          <Key>
+            <PropertyRef Name="commentID" />
+          </Key>
+          <Property Name="commentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="comment" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="authoridsof" Type="Int32" Nullable="false" />
+          <Property Name="poetryidsof" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbmember" Relationship="PoetryBookDbModel.FK_tbcomment_tbmember" FromRole="tbcomment" ToRole="tbmember" />
+          <NavigationProperty Name="tbpoetry" Relationship="PoetryBookDbModel.FK_tbcomment_tbpoetry" FromRole="tbcomment" ToRole="tbpoetry" />
+        </EntityType>
+        <EntityType Name="tbmember">
+          <Key>
+            <PropertyRef Name="memberID" />
+          </Key>
+          <Property Name="memberID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nick" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="nameandsurname" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="mail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="birthdate" Type="DateTime" Precision="0" />
+          <Property Name="gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="accounttype" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="tbcomments" Relationship="PoetryBookDbModel.FK_tbcomment_tbmember" FromRole="tbmember" ToRole="tbcomment" />
+        </EntityType>
+        <EntityType Name="tbpoet">
+          <Key>
+            <PropertyRef Name="poetID" />
+          </Key>
+          <Property Name="poetID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nameandsurname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="biography" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbpoetries" Relationship="PoetryBookDbModel.FK_tbpoetry_tbpoet" FromRole="tbpoet" ToRole="tbpoetry" />
+        </EntityType>
+        <EntityType Name="tbpoetry">
+          <Key>
+            <PropertyRef Name="poetryID" />
+          </Key>
+          <Property Name="poetryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="content" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="poetidsof" Type="Int32" Nullable="false" />
+          <Property Name="catidsof" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbcategory" Relationship="PoetryBookDbModel.FK_tbpoetry_tbcategory" FromRole="tbpoetry" ToRole="tbcategory" />
+          <NavigationProperty Name="tbcomments" Relationship="PoetryBookDbModel.FK_tbcomment_tbpoetry" FromRole="tbpoetry" ToRole="tbcomment" />
+          <NavigationProperty Name="tbpoet" Relationship="PoetryBookDbModel.FK_tbpoetry_tbpoet" FromRole="tbpoetry" ToRole="tbpoet" />
+        </EntityType>
+        <Association Name="FK_tbpoetry_tbcategory">
+          <End Type="PoetryBookDbModel.tbcategory" Role="tbcategory" Multiplicity="1" />
+          <End Type="PoetryBookDbModel.tbpoetry" Role="tbpoetry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbcategory">
+              <PropertyRef Name="categoryID" />
+            </Principal>
+            <Dependent Role="tbpoetry">
+              <PropertyRef Name="catidsof" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbcomment_tbmember">
+          <End Type="PoetryBookDbModel.tbmember" Role="tbmember" Multiplicity="1" />
+          <End Type="PoetryBookDbModel.tbcomment" Role="tbcomment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbmember">
+              <PropertyRef Name="memberID" />
+            </Principal>
+            <Dependent Role="tbcomment">
+              <PropertyRef Name="authoridsof" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbcomment_tbpoetry">
+          <End Type="PoetryBookDbModel.tbpoetry" Role="tbpoetry" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="PoetryBookDbModel.tbcomment" Role="tbcomment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbpoetry">
+              <PropertyRef Name="poetryID" />
+            </Principal>
+            <Dependent Role="tbcomment">
+              <PropertyRef Name="poetryidsof" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbpoetry_tbpoet">
+          <End Type="PoetryBookDbModel.tbpoet" Role="tbpoet" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="PoetryBookDbModel.tbpoetry" Role="tbpoetry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbpoet">
+              <PropertyRef Name="poetID" />
+            </Principal>
+            <Dependent Role="tbpoetry">
+              <PropertyRef Name="poetidsof" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PoetryBookDbModelStoreContainer" CdmEntityContainer="PoetryBookDbEntities">
+          <EntitySetMapping Name="tbcategories">
+            <EntityTypeMapping TypeName="PoetryBookDbModel.tbcategory">
+              <MappingFragment StoreEntitySet="tbcategory">
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="categoryID" ColumnName="categoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbcomments">
+            <EntityTypeMapping TypeName="PoetryBookDbModel.tbcomment">
+              <MappingFragment StoreEntitySet="tbcomment">
+                <ScalarProperty Name="poetryidsof" ColumnName="poetryidsof" />
+                <ScalarProperty Name="authoridsof" ColumnName="authoridsof" />
+                <ScalarProperty Name="comment" ColumnName="comment" />
+                <ScalarProperty Name="commentID" ColumnName="commentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbmembers">
+            <EntityTypeMapping TypeName="PoetryBookDbModel.tbmember">
+              <MappingFragment StoreEntitySet="tbmember">
+                <ScalarProperty Name="accounttype" ColumnName="accounttype" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="birthdate" ColumnName="birthdate" />
+                <ScalarProperty Name="mail" ColumnName="mail" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="nameandsurname" ColumnName="nameandsurname" />
+                <ScalarProperty Name="nick" ColumnName="nick" />
+                <ScalarProperty Name="memberID" ColumnName="memberID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbpoets">
+            <EntityTypeMapping TypeName="PoetryBookDbModel.tbpoet">
+              <MappingFragment StoreEntitySet="tbpoet">
+                <ScalarProperty Name="biography" ColumnName="biography" />
+                <ScalarProperty Name="nameandsurname" ColumnName="nameandsurname" />
+                <ScalarProperty Name="poetID" ColumnName="poetID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbpoetries">
+            <EntityTypeMapping TypeName="PoetryBookDbModel.tbpoetry">
+              <MappingFragment StoreEntitySet="tbpoetry">
+                <ScalarProperty Name="catidsof" ColumnName="catidsof" />
+                <ScalarProperty Name="poetidsof" ColumnName="poetidsof" />
+                <ScalarProperty Name="content" ColumnName="content" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="poetryID" ColumnName="poetryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

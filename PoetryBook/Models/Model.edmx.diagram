@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d8ddbc3a75194537adaeae5defa647be" Name="Diagram1">
+        <EntityTypeShape EntityType="PoetryBookDbModel.tbcategory" Width="1.5" PointX="0.75" PointY="1.375" />
+        <EntityTypeShape EntityType="PoetryBookDbModel.tbcomment" Width="1.5" PointX="5.25" PointY="1.125" />
+        <EntityTypeShape EntityType="PoetryBookDbModel.tbmember" Width="1.5" PointX="3" PointY="4.875" />
+        <EntityTypeShape EntityType="PoetryBookDbModel.tbpoet" Width="1.5" PointX="0.75" PointY="5.375" />
+        <EntityTypeShape EntityType="PoetryBookDbModel.tbpoetry" Width="1.5" PointX="3" PointY="1" />
+        <AssociationConnector Association="PoetryBookDbModel.FK_tbpoetry_tbcategory" />
+        <AssociationConnector Association="PoetryBookDbModel.FK_tbcomment_tbmember" />
+        <AssociationConnector Association="PoetryBookDbModel.FK_tbcomment_tbpoetry" />
+        <AssociationConnector Association="PoetryBookDbModel.FK_tbpoetry_tbpoet" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

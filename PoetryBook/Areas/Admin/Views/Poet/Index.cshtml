@@ -1,0 +1,252 @@
+﻿@using PoetryBook.Models;
+@{
+    ViewBag.Title = "Index";
+}
+@model tbpoet
+
+<div id="page-wrapper">
+    @if (Model == null)
+    {
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">
+                        Şair Yönetimi
+
+                    </h1>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+
+                    <br />
+
+                    <h2>Şair Ekle</h2>
+
+
+                    <hr />
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+
+                    <form role="form" action="/Admin/Poet/AddOrEditPoetAsync" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+
+                            <label>Adı</label>
+
+                            <input class="form-control" id="namesur" name="namesur" />
+                            <input type="hidden" id="poetid" name="poetid" value="0" />
+
+
+
+
+                        </div>
+                        <div class="form-group">
+                            <label>Biyografi</label>
+
+                            <textarea class="form-control" rows="3" id="bio" name="bio"></textarea>
+
+
+                        </div>
+
+
+                        <button id="btnaddpoet" class="btn btn-default">Ekle</button>
+
+
+
+                    </form>
+
+
+                </div>
+            </div>
+
+            <!-- list poet begin -->
+            <div class="row">
+                <div class="col-sm-12">
+
+                    <br />
+                    <h2>Şair Listesi</h2>
+                    <hr />
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-4 text-center">
+                    Adı Soyadı
+
+                </div>
+                <div class="col-sm-5 text-center">
+                    Biyografi
+
+                </div>
+
+                <div class="col-sm-3 text-center">
+                    İşlem
+                </div>
+            </div>
+            @if (ViewBag.poets.Count > 0)
+            {
+                foreach (tbpoet item in ViewBag.poets)
+                {
+
+                    <br />
+                    <div class="row" id="r_@item.poetID">
+                        <div class="col-sm-4 text-center">
+                            <a href="/Admin/Poet/Index/@item.poetID">@item.nameandsurname</a>
+
+                        </div>
+                        <div class="col-sm-5 text-center">
+                            @item.biography;
+
+                        </div>
+
+                        <div class="col-sm-3 text-center">
+
+                            <a href="/Admin/Poet/Index/@item.poetID">Düzenle</a> |
+                            <a id="delpoet_@item.poetID" class="deletepoetinlist" style="cursor:pointer">Sil</a>
+
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <br />
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+                        <label>Kayıt bulunamadı.</label>
+                    </div>
+                </div>
+            }
+            <br />
+        </div>
+    }
+    else
+    {
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1>@Model.nameandsurname</h1>
+                    <hr />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <a href="#info">Bilgiler</a> |
+                    <a href="#poetry">Şiirler</a>
+                </div>
+            </div>
+
+            <a name="info">
+                <section id="info">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h2>Bilgiler</h2>
+                            <hr />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+
+                            <form role="form" action="/Admin/Poet/AddOrEditPoetAsync" method="post" enctype="multipart/form-data">
+                                <div class="form-group">
+
+                                    <label>Adı</label>
+
+                                    <input class="form-control" id="namesur" name="namesur" value="@Model.nameandsurname" />
+                                    <input type="hidden" id="poetid" name="poetid" value="@Model.poetID" />
+
+
+
+
+                                </div>
+                                <div class="form-group">
+                                    <label>Biyografi</label>
+
+                                    <textarea class="form-control" rows="3" id="bio" name="bio">@Model.biography</textarea>
+
+
+                                </div>
+
+
+                                <button id="btneditpoet" class="btn btn-default">Kaydet</button>
+
+                                
+
+                            </form>
+
+
+                        </div>
+                    </div>
+
+                </section>
+            </a>
+            <a name="poetry">
+                <section id="poetry">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h3>Şiirleri
+                                <a class="pull-right" title="Yeni Şiir Ekle" href="/Admin/Poet/PoetryDetail/@Model.poetID">
+                                    <i class="glyphicon glyphicon-pencil"></i>
+
+                                </a>
+                            </h3>
+                                
+                            
+                            <hr />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-9 text-center">
+                            Başlık
+
+                        </div>
+
+                        <div class="col-sm-3 text-center">
+                            İşlem
+                        </div>
+                    </div>
+                    @if (Model.tbpoetries.Count > 0)
+                    {
+                        foreach (tbpoetry item in Model.tbpoetries)
+                        {
+
+                            <br />
+                            <div class="row" id="r_@item.poetryID">
+                                <div class="col-sm-9 text-center">
+                                    <a href="/Admin/Poet/PoetryDetail/@item.poetidsof/@item.poetryID/">
+                                    @item.title
+                                    </a>
+
+                                </div>
+
+                                <div class="col-sm-3 text-center">
+
+                                    <a href="/Admin/Poet/PoetryDetail/@item.poetidsof/@item.poetryID/">Düzenle</a> |
+                                    <a id="delpoetry_@item.poetryID" class="deletepoetryinlist" style="cursor:pointer">Sil</a>
+
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-12 text-center">
+                                <label>Kayıt bulunamadı.</label>
+                            </div>
+                        </div>
+                    }
+                    <br />
+
+                </section>
+            </a>
+        </div>
+    }
+        
+</div>

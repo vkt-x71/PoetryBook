@@ -1,0 +1,44 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@using PoetryBook;
+@using PoetryBook.Classes
+@using PoetryBook.Models
+
+@{
+    ViewBag.Title = "Details";
+
+
+}
+@model IPagedList<tbpoetry>
+
+<h2>@InOp.getUILangTextFor("strPoetry")</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8">
+            @InOp.getUILangTextFor("strPoetry")
+        </div>
+        <div class="col-sm-4">
+            @InOp.getUILangTextFor("strPoet")
+        </div>
+    </div>
+    <div class="row">
+        @foreach (tbpoetry poetry in Model)
+        {
+            <div class="col-sm-8">
+                <a href="/Poetry/Index/@poetry.poetryID"> > @poetry.title </a>
+                <br />
+            </div>
+            <div class="col-sm-4">
+                @poetry.tbpoet.nameandsurname
+            </div>
+        }
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+
+            @Html.PagedListPager(Model, _pageNo => Url.Action("Details", "Category", new { pageNo = _pageNo }))
+
+        </div>
+    </div>
+</div>
+

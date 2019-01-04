@@ -1,0 +1,85 @@
+﻿@using PoetryBook
+@using PoetryBook.Classes
+@{
+    ViewBag.Title = "Create";
+}
+
+<div style="margin:0px;padding:0px;" class="panel panel-primary">
+    <div class="panel-heading">
+        <h4>@InOp.getUILangTextFor("strCreateAcc")</h4>
+    </div>
+    <div class="panel-body">
+        <div class="row info-bar">
+            <div class="col-sm-offset-2 col-sm-8">
+                <form id="createform" class="form-horizontal">
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label" for="inputEmail">@InOp.getUILangTextFor("strMail") (*)</label>
+                            <div class="col-lg-9">
+                                <input class="form-control" id="mail" name="mail" type="text" placeholder="@InOp.getUILangTextFor("strMsgEnterMail")" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label" for="inputEmail">@InOp.getUILangTextFor("strNick") (*)</label>
+                            <div class="col-lg-9">
+                                <input class="form-control" id="nick" name="nick" type="text" placeholder="@InOp.getUILangTextFor("strMsgNick")" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label" for="inputEmail">@InOp.getUILangTextFor("strNameAndSurname") (*)</label>
+                            <div class="col-lg-9">
+                                <input class="form-control" id="namesur" name="namesur" type="text" placeholder="@InOp.getUILangTextFor("strNameAndSurname")" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label" for="inputEmail">@InOp.getUILangTextFor("strBirthDate") (*)</label>
+                            <div class="col-lg-9">
+                                <input class="form-control" id="dt" name="dt" type="date" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label" for="inputEmail">@InOp.getUILangTextFor("strGender") (*)</label>
+                            <div class="col-lg-9">
+                                <input id="gender" name="gender" type="radio" value="M" required> @InOp.getUILangTextFor("strMale")
+
+                                <input id="gender" name="gender" type="radio" value="F" required> @InOp.getUILangTextFor("strFemale")
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label" for="inputPassword">@InOp.getUILangTextFor("strPassword") (*)</label>
+                            <div class="col-lg-9">
+                                <input class="form-control" id="pass" required name="pass" type="password" placeholder="@InOp.getUILangTextFor("strMsgPassword")">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label" for="inputPassword">@InOp.getUILangTextFor("strPassword") @InOp.getUILangTextFor("strConfirm") (*)</label>
+                            <div class="col-lg-9">
+                                <input class="form-control" id="pass2" name="pass2" type="password" placeholder="@InOp.getUILangTextFor("strConfirm")" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label" for="inputPassword">@InOp.getUILangTextFor("strSecurityCode") (*)</label>
+                            <div class="col-lg-9">
+                                <img src="/Captcha.aspx" />
+                                <input class="form-control" id="sec" name="sec" type="text" placeholder="@InOp.getUILangTextFor("strMsgSecurityCode")" required>
+                            </div>
+                        </div>
+
+                    </fieldset>
+                </form>
+                <div class="form-group">
+                    <div class="col-lg-9 col-lg-offset-3">
+                        <button id="btnCreateUser" class="btn btn-primary" type="submit">
+                            <i class="fa fa fa-check"></i> @InOp.getUILangTextFor("strCreateAcc")
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <a href="/Account/Login">@InOp.getUILangTextFor("strAlreadyAccount")</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+

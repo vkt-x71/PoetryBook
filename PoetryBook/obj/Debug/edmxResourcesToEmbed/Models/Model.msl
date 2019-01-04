@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PoetryBookDbModelStoreContainer" CdmEntityContainer="PoetryBookDbEntities">
+    <EntitySetMapping Name="tbcategories">
+      <EntityTypeMapping TypeName="PoetryBookDbModel.tbcategory">
+        <MappingFragment StoreEntitySet="tbcategory">
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="categoryID" ColumnName="categoryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbcomments">
+      <EntityTypeMapping TypeName="PoetryBookDbModel.tbcomment">
+        <MappingFragment StoreEntitySet="tbcomment">
+          <ScalarProperty Name="poetryidsof" ColumnName="poetryidsof" />
+          <ScalarProperty Name="authoridsof" ColumnName="authoridsof" />
+          <ScalarProperty Name="comment" ColumnName="comment" />
+          <ScalarProperty Name="commentID" ColumnName="commentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbmembers">
+      <EntityTypeMapping TypeName="PoetryBookDbModel.tbmember">
+        <MappingFragment StoreEntitySet="tbmember">
+          <ScalarProperty Name="accounttype" ColumnName="accounttype" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="birthdate" ColumnName="birthdate" />
+          <ScalarProperty Name="mail" ColumnName="mail" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="nameandsurname" ColumnName="nameandsurname" />
+          <ScalarProperty Name="nick" ColumnName="nick" />
+          <ScalarProperty Name="memberID" ColumnName="memberID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbpoets">
+      <EntityTypeMapping TypeName="PoetryBookDbModel.tbpoet">
+        <MappingFragment StoreEntitySet="tbpoet">
+          <ScalarProperty Name="biography" ColumnName="biography" />
+          <ScalarProperty Name="nameandsurname" ColumnName="nameandsurname" />
+          <ScalarProperty Name="poetID" ColumnName="poetID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbpoetries">
+      <EntityTypeMapping TypeName="PoetryBookDbModel.tbpoetry">
+        <MappingFragment StoreEntitySet="tbpoetry">
+          <ScalarProperty Name="catidsof" ColumnName="catidsof" />
+          <ScalarProperty Name="poetidsof" ColumnName="poetidsof" />
+          <ScalarProperty Name="content" ColumnName="content" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="poetryID" ColumnName="poetryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,23 @@
+﻿@using PoetryBook;
+@using PoetryBook.Classes;
+@model IEnumerable<PoetryBook.Models.tbcategory>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>
+    @InOp.getUILangTextFor("strCategories")
+</h2>
+
+<div class="container">
+    <div class="row">
+        
+        @foreach (var item in Model)
+        {
+            <div class="col-sm-3">
+                > @Html.ActionLink(item.name, "Details", new { id = item.categoryID })
+            </div>
+        }
+    </div>
+</div>

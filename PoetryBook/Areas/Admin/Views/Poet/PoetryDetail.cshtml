@@ -1,0 +1,139 @@
+﻿@using PoetryBook.Models;
+@{
+    ViewBag.Title = "Index";
+}
+@model tbpoetry
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    Şiir Yönetimi
+
+                </h1>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+
+                <br />
+
+                <h2>Şiir Ekle</h2>
+
+
+                <hr />
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-9">
+
+                <form role="form" action="/Admin/Poet/AddOrEditPoetryAsync" method="post" enctype="multipart/form-data">
+                    <input type="hidden" id="poetidsof" name="poetidsof" value="@ViewBag.poetid" />
+                    "
+                    <div class="form-group">
+                        +
+
+                        <label>Başlık</label>
+                        @if (Model == null)
+                        {
+                            <input class="form-control" id="title" name="title" />
+                            <input type="hidden" id="poetryid" name="poetryid" value="0" />
+                        }
+                        else
+                        {
+                            <input class="form-control" id="title" name="title" value="@Model.title" />
+                            <input type="hidden" id="poetryid" name="poetryid" value="@Model.poetryID" />
+
+                        }
+
+
+
+                    </div>
+                    <div class="form-group">
+                        <label>Kategori Seç</label>
+                        <select class="form-control" id="catid" name="catid">
+                            <option value="0">--Seçiniz.</option>
+                            @foreach (tbcategory item in ViewBag.cats)
+                            {
+                                if (Model != null && Model.catidsof == item.categoryID)
+                                {
+                                    <option selected value="@item.categoryID">
+                                        @item.name
+                                    </option>
+                                }
+                                else
+                                {
+
+                                    <option value="@item.categoryID">
+                                        @item.name
+                                    </option>
+                                }
+
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>İçerik</label>
+                        @if (Model == null)
+                        {
+                            <textarea class="form-control" rows="11" cols="33" id="content" name="content"></textarea>
+                        }
+                        else
+                        {
+                            <textarea class="form-control" rows="11" cols="33" id="content" name="content">@Model.content</textarea>
+
+                        }
+
+
+                    </div>
+
+                    @if (Model == null)
+                    {
+                        <button id="btnaddpoetry" class="btn btn-default">Ekle</button>
+
+                    }
+                    else
+                    {
+                        <button id="btneditpoetry" class="btn btn-default">Düzenle</button>
+
+                    }
+
+
+
+                </form>
+
+
+            </div>
+        </div>
+
+
+        <br />
+    </div>
+
+
+</div>
+<script src="~/Scripts/tinymce/tinymce.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+        // Initialize your tinyMCE Editor with your preferred options
+        tinyMCE.init({
+            // General options
+            mode: "textareas",
+            theme: "modern",
+            // Theme options
+            theme_advanced_buttons1: "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect,fontselect,fontsizeselect",
+            theme_advanced_buttons2: "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor",
+            theme_advanced_buttons3: "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen",
+            theme_advanced_buttons4: "insertlayer,moveforward,movebackward,absolute,|,styleprops,spellchecker,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,blockquote,pagebreak,|,insertfile,insertimage",
+            theme_advanced_toolbar_location: "top",
+            theme_advanced_toolbar_align: "left",
+            theme_advanced_statusbar_location: "bottom",
+            theme_advanced_resizing: true,
+
+            // Example content CSS (should be your site CSS)
+            content_css: "css/example.css",
+        });
+</script>

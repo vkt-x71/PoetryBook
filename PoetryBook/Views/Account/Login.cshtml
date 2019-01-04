@@ -1,0 +1,58 @@
+﻿@using PoetryBook;
+@using PoetryBook.Classes;
+@{
+    ViewBag.Title = "Login";
+}
+
+<div style="margin:0px;padding:0px;" class="panel panel-primary">
+    <div class="panel-heading">
+        <h4>
+            @InOp.getUILangTextFor("strLogin")
+        </h4>
+    </div>
+    <div class="panel-body">
+
+        <div class="row info-bar">
+            <div class="col-sm-offset-2 col-sm-8">
+                <form class="form-horizontal" id="loginform">
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label" for="inputEmail">Email</label>
+                            <div class="col-lg-9">
+                                <input class="form-control" id="maillog" name="maillog" type="text" placeholder="@InOp.getUILangTextFor("strMail")" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label" for="inputPassword">@InOp.getUILangTextFor("strPassword")</label>
+                            <div class="col-lg-9">
+                                <input class="form-control" id="passlog" required name="passlog" type="password" placeholder="@InOp.getUILangTextFor("strMsgPassword")">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value="true" name="remember" id="remember"> @InOp.getUILangTextFor("strRememberMe")
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </fieldset>
+                </form>
+                <div class="form-group">
+                    <div class="col-lg-9 col-lg-offset-3">
+                        <button id="btnLogin" class="btn btn-primary" type="submit">
+                            <i class="fa fa fa-check"></i> @InOp.getUILangTextFor("strLogin")
+                        </button>
+                    </div>
+                </div>
+                <div class="clear20"></div>
+                <div class="form-group">
+                    <a href="/Account/Create">@InOp.getUILangTextFor("strCreateAcc")</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+

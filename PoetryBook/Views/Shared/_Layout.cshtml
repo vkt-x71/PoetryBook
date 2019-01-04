@@ -1,0 +1,109 @@
+﻿@using PoetryBook.Models
+@using PoetryBook.Classes
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("PoetryBook", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink(InOp.getUILangTextFor("strHome"), "Index", "Home")</li>
+                    <li>@Html.ActionLink(InOp.getUILangTextFor("strAbout"), "About", "Home")</li>
+                    <li><a href="/Poet/Index">@InOp.getUILangTextFor("strPoets")</a></li>
+                    <li><a href="/Category/Index">@InOp.getUILangTextFor("strCategories")</a></li>
+                    <li>@Html.ActionLink(InOp.getUILangTextFor("strContact"), "Contact", "Home")</li>
+                    @if (Session["member"] == null)
+                    {
+                        <li>@Html.ActionLink(InOp.getUILangTextFor("strLogin"), "Login", "Account")</li>
+                        <li>@Html.ActionLink(InOp.getUILangTextFor("strCreateAccount"), "Create", "Account")</li>
+                    }
+                    else
+                    {
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown">
+                                @{
+                                    tbmember mem = Session["member"] as tbmember;
+                                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+                                        @mem.nick
+                                    </a>
+
+                                }
+                                <ul class="dropdown-menu">
+                                    @if ((Session["member"] as tbmember).accounttype == "A")
+                                    {
+                                        <li>
+                                            <a target="_blank" href="/Admin/">@InOp.getUILangTextFor("strAdminPanel")</a>
+                                        </li>
+                                    }
+                                        <li>@Html.ActionLink(InOp.getUILangTextFor("strLogOut"), "LogOut", "Account")</li>
+                                </ul>
+                            </li>
+
+
+                        </ul>
+                    }
+                    <li>
+                        @if (InOp.getUiLang() == UILang.Turkish)
+                        {
+                            <a style="cursor:text" id="btnLangTr">TR</a>
+
+                        }
+                        else
+                        {
+                            <a style="cursor:pointer" id="btnLangTr">TR</a>
+                        }
+                    </li>
+                    <li>
+                        @if (InOp.getUiLang() == UILang.English)
+                        {
+                            <a style="cursor:text" id="btnLangEn">EN</a>
+
+                        }
+                        else
+                        {
+                            <a style="cursor:pointer" id="btnLangEn">EN</a>
+                        }
+                    </li>
+                </ul>
+                <form class="form-inline" method="get" action="/Poetry/Search">
+                    <div class="form-group mb-2">
+                        <input type="text"  class="form-control-plaintext" id="q" name="q" placeholder="@InOp.getUILangTextFor("strSearch")">
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2">@InOp.getUILangTextFor("strSearch")</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+
+        <div class="clear20"></div>
+        <div class="clear20"></div>
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Poetry Book</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jquerycook")
+    @Scripts.Render("~/bundles/formpost")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

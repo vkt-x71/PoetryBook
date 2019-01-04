@@ -1,0 +1,40 @@
+﻿@using PoetryBook.Models
+@using PoetryBook;
+@using PoetryBook.Classes;
+@model tbpoetry
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h2>@Model.title</h2>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            @Html.Raw(HttpUtility.HtmlEncode(InOp.ReadyPoetry(Model.content)))
+
+
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-12">
+            @InOp.getUILangTextFor("strPoet") : <a href="/Poet/Details/@Model.tbpoet.poetID">
+                @Model.tbpoet.nameandsurname
+            </a>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-12">
+            @InOp.getUILangTextFor("strCategory") : <a href="/Category/Details/@Model.tbcategory.categoryID">
+                @Model.tbcategory.name
+            </a>
+        </div>
+    </div>
+</div>
+

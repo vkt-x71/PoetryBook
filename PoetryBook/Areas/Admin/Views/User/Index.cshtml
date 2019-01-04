@@ -1,0 +1,46 @@
+﻿@using PoetryBook.Models
+@{
+    ViewBag.Title = "Index";
+}
+@model List<tbmember>
+<h2>KKullanıcılar</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8">
+            Kullanıcı Adı
+        </div>
+        <div class="col-sm-4">
+            Değiştir
+        </div>
+    </div>
+    @foreach(var item in Model)
+    {
+        <div class="row">
+            <div class="col-sm-7">
+                @item.mail
+            </div>
+            <div class="col-sm-3">
+                @if (item.accounttype == "A")
+                {
+                    <a href="/Admin/User/ChangeType/@item.memberID">
+                        Normal Yap
+                    </a>
+                }
+                else
+                {
+                    <a href="/Admin/User/ChangeType/@item.memberID">
+                        Admin Yap
+                    </a>
+                }
+            </div>
+            <div class="col-sm-2">
+                <a href="/Admin/User/Delete/@item.memberID">
+                    Sil
+                </a>
+            </div>
+        </div>
+    }
+</div>
+
+
